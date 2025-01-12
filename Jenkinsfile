@@ -32,9 +32,6 @@ node {
     // Simpan hasil build ke artifact
     archiveArtifacts 'dist/add2vals'
 
-    // hapus directory hasil build
-    sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "rm -rf build dist"'
-
     withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity',  usernameVariable: 'userName'), string(credentialsId: 'server-ip', variable: 'ip')]) {
       remote.host = ip 
       remote.user = userName
@@ -43,15 +40,9 @@ node {
       sshPut remote: remote, from: 'dist/add2vals', into: '.'
       sshCommand remote: remote, command: 'ls'
       sshCommand remote: remote, command: 'add2vals 10 10'
-
-      //sshCommand remote: remote, command: 'docker compose pull'
-      //// memastikan docker image terbaru sudah diambil
-      //sshCommand remote: remote, command: 'docker image pull abduzzy/react-app:latest'
-      //
-      //sshCommand remote: remote, command: 'docker compose down'
-      //sshCommand remote: remote, command: 'docker compose up -d'
     }
-    //TODO: push to server
+
+    // hapus directory hasil build
+    sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "rm -rf build dist"'
   }
-    // TODO: Run python
 }
