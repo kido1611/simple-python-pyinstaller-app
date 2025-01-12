@@ -63,19 +63,17 @@ node {
   //  }
   //}
 
-  stage('Manual Approval') {
-    //input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
-    docker.image('cdrx/pyinstaller-linux:python2').inside("-i -u root") {
-      sh 'pyinstaller --help'
-      //sh 'pyinstaller --onefile sources/add2vals.py'
-    }
-  }
+  //stage('Manual Approval') {
+  //  input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
+  //}
 
   stage('Deploy') {
-    docker.image('cdrx/pyinstaller-linux:python2').inside {
-      sh 'pyinstaller --help'
-      //sh 'pyinstaller --onefile sources/add2vals.py'
-    }
+    sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "pyinstaller --help'
+    //sh 'docker run -v "$(pwd):/src/" cdrx/pyinstaller-linux:python2 -c "pyinstaller --onefile sources/add2vals.py'
+    //docker.image('cdrx/pyinstaller-linux:python2').inside {
+    //  sh 'pyinstaller --help'
+    //  //sh 'pyinstaller --onefile sources/add2vals.py'
+    //}
     //try {
     //docker.image('cdrx/pyinstaller-linux:python2').inside() {
     //}
