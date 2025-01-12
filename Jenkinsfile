@@ -39,7 +39,8 @@ node {
 
       sshPut remote: remote, from: 'dist/add2vals', into: '.'
       sshCommand remote: remote, command: 'ls'
-      sshCommand remote: remote, command: 'add2vals 10 10'
+      sshCommand remote: remote, command: 'chmod +x add2vals'
+      sshCommand remote: remote, command: './add2vals 10 10'
     }
 
     // hapus directory hasil build
