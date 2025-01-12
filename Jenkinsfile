@@ -28,6 +28,8 @@ node {
 
   stage('Deploy') {
     sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "pyinstaller --onefile sources/add2vals.py"'
+
+    sleep time: 1, unit: 'MINUTES'
     
     // Simpan hasil build ke artifact
     archiveArtifacts 'dist/add2vals'
