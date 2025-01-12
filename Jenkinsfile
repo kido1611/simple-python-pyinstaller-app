@@ -1,5 +1,7 @@
 node {
   stage('Build') {
+    checkout scm // memastikan jenkins melakukan fetch/pull code terlebih dahulu
+
     docker.image('python:2-alpine').inside() {
       sh 'python -m py_compile sources/add2vals.py sources/calc.py'
     }
