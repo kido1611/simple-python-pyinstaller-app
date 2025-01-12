@@ -19,14 +19,14 @@ node {
 
   stage('Manual Approval') {
     //input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
-    docker.image('cdrx/pyinstaller-linux:python2').inside() {
+    docker.image('cdrx/pyinstaller-linux:python2').inside {
       sh 'pyinstaller --help'
       //sh 'pyinstaller --onefile sources/add2vals.py'
     }
   }
 
   stage('Deploy') {
-    docker.image('cdrx/pyinstaller-linux:python2').inside() {
+    docker.image('cdrx/pyinstaller-linux:python2').inside {
       sh 'pyinstaller --help'
       //sh 'pyinstaller --onefile sources/add2vals.py'
     }
