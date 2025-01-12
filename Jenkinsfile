@@ -18,15 +18,21 @@ node {
   }
 
   stage('Manual Approval') {
-    input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
+    //input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
+    docker.image('cdrx/pyinstaller-linux:python2').inside() {
+      sh 'pyinstaller --help'
+      //sh 'pyinstaller --onefile sources/add2vals.py'
+    }
   }
 
   stage('Deploy') {
+    docker.image('cdrx/pyinstaller-linux:python2').inside() {
+      sh 'pyinstaller --help'
+      //sh 'pyinstaller --onefile sources/add2vals.py'
+    }
     //try {
-      docker.image('cdrx/pyinstaller-linux:python2').inside() {
-        sh 'pyinstaller --help'
-        sh 'pyinstaller --onefile sources/add2vals.py'
-      }
+    //docker.image('cdrx/pyinstaller-linux:python2').inside() {
+    //}
     //}
     //finally {
     //  archiveArtifacts 'dist/add2vals'
