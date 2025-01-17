@@ -46,6 +46,6 @@ node {
     }
 
     // hapus directory hasil build
-    sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "rm -rf build dist"'
+    sh 'docker run --rm -v ".:/src/" cdrx/pyinstaller-linux:python2 -c "rm -rf build dist add2vals.spec"'
   }
 }
